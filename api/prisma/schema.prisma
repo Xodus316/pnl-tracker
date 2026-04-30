@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Trade {
+  id           Int       @id @default(autoincrement())
+  openDate     DateTime  @db.Date
+  expiration   DateTime? @db.Date
+  closeDate    DateTime  @db.Date
+  stock        String
+  direction    String
+  strategy     String
+  strikes      String?
+  amount       Int
+  openingPrice Decimal   @db.Decimal(12, 4)
+  closingPrice Decimal   @db.Decimal(12, 4)
+  fees         Decimal   @db.Decimal(12, 4)
+  profit       Decimal   @db.Decimal(12, 2)
+  winLoss      String
+  broker       String?
+  bot          Boolean   @default(false)
+  notes        String?
+  createdAt    DateTime  @default(now())
+  batchId      Int?
+  batch        ImportBatch? @relation(fields: [batchId], references: [id], onDelete: Cascade)
+
+  @@index([closeDate])
+  @@index([strategy])
+  @@index([stock])
+  @@index([broker])
+  @@index([batchId])
+  @@map("trades")
+}
+
+model ImportBatch {
+  id           Int      @id @default(autoincrement())
+  filename     String?
+  mode         String
+  source       String   @default("upload")
+  rowsInserted Int
+  importedAt   DateTime @default(now())
+  trades       Trade[]
+
+  @@map("import_batches")
+}

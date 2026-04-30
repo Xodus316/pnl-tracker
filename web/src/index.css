@@ -1,0 +1,115 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    font-family: "Exo 2", sans-serif;
+    background-color: #0a0a0f;
+    color: #a0a0bd;
+    background-image:
+      linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+      radial-gradient(
+        ellipse at 50% 0%,
+        rgba(0, 240, 255, 0.04) 0%,
+        transparent 60%
+      );
+    background-size:
+      40px 40px,
+      40px 40px,
+      100% 100%;
+    background-position:
+      -1px -1px,
+      -1px -1px,
+      center top;
+    background-attachment: fixed;
+  }
+
+  #root::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.03) 0px,
+      rgba(0, 0, 0, 0.03) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(0.6) sepia(0.3) hue-rotate(180deg);
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0d0d14;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a3d;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3a3a52;
+  }
+
+  ::selection {
+    background: rgba(0, 240, 255, 0.2);
+    color: #e8e8f4;
+  }
+}
+
+@layer components {
+  .cyber-card {
+    @apply rounded-lg border border-cyber-800 bg-cyber-950/70 transition-all duration-300;
+  }
+  .cyber-card:hover {
+    @apply border-cyber-700 shadow-card-hover;
+  }
+
+  .cyber-card-interactive {
+    @apply cyber-card cursor-pointer;
+  }
+  .cyber-card-interactive:hover {
+    @apply border-neon-cyan/30 shadow-neon-cyan-sm;
+  }
+
+  .header-border-glow {
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 240, 255, 0.2),
+        rgba(180, 77, 255, 0.2),
+        transparent
+      )
+      1;
+  }
+
+  .section-heading {
+    @apply font-display text-sm font-medium text-cyber-400 uppercase tracking-[0.2em];
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+  }
+  .text-glow-green {
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+  }
+  .text-glow-magenta {
+    text-shadow: 0 0 8px rgba(255, 45, 120, 0.4);
+  }
+}

@@ -1,0 +1,11 @@
+node_modules
+dist
+*.tsbuildinfo
+.env
+*.log
+.DS_Store
+api/prisma/migrations/dev.db*
+backups/*
+!backups/.gitkeep
+credentials/*
+!credentials/.gitkeep
